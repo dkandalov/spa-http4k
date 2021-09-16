@@ -1,4 +1,4 @@
-- please check **clone** this project
+- please **clone** this project
 - make sure `./gradlew test` works ok
 - and you can compile and run project from IntelliJ IDEA
   (I noticed some random problems in the latest IDE versions configuring project via gradle,
