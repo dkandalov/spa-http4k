@@ -7,12 +7,15 @@ import org.http4k.routing.routes
 import org.http4k.server.ApacheServer
 import org.http4k.server.asServer
 
+
+class NameIsRequired : Exception()
+
 val routes = routes(
     "/hello" bind GET to {
         Response(OK).body("Hello 🌍")
     },
     "/bye" bind GET to { request ->
-        val name = request.query("name")
+        val name: String = request.query("name") ?: throw NameIsRequired()
         Response(OK).body("Bye, $name 👋")
     },
 )
@@ -22,5 +25,5 @@ fun main() {
     httpServer.asServer(ApacheServer(port = 8080)).start()
 
     val httpClient = OkHttp()
-    println(httpClient(Request(GET, "http://localhost:8080/bye?name=Raul")))
+    println(httpClient(Request(GET, "http://localhost:8080/bye?nameee=Raul")))
 }
